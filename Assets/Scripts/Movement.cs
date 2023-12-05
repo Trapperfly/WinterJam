@@ -4,30 +4,42 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] float moveModifier;
-    [SerializeField] float groundedModifier;
-    [SerializeField] float aerialModifier;
+    Rigidbody rb;
 
+    [Header("Speeds")]
     [SerializeField] float moveSpeed;
     [SerializeField] float runSpeed;
+    [SerializeField] float drag;
 
+    [Header("Jumping")]
     [SerializeField] float jumpStrength;
     [SerializeField] float doubleJumpStrength;
     [SerializeField] float groundDrag;
-    Rigidbody rb;
     [SerializeField] int jumps;
     int localJumps;
+    float aerialMovementLoss;
 
+    [Header("Gravity")]
     [SerializeField] float fallGravity;
     [SerializeField] float floatGravity;
     [SerializeField] float slamGravity;
     [SerializeField] float gravity;
+    bool slamming;
 
+    [Header("GroundCheck")]
     [SerializeField] LayerMask ground;
     [SerializeField] float playerHeight;
     public bool grounded;
 
-    [SerializeField] float aerialMovementLoss;
+    [Header("Modifiers")]
+    [SerializeField] float moveModifier;
+    [SerializeField] float groundedModifier;
+
+    [Header("Upgrade States")]
+    [SerializeField] bool placeholderUpgrade;
+    [SerializeField] bool moreJumps;
+    [SerializeField] bool slowFall;
+    [SerializeField] bool slam;
 
     private void Awake()
     {
@@ -39,15 +51,28 @@ public class Movement : MonoBehaviour
     void Update()
     {
         DoGravity();
+        DoDrag();
         CheckIfGrounded();
         HandlePhysics();
         HandleInputs();
 
         if (grounded) localJumps = jumps;
         if (grounded) moveModifier = groundedModifier;
-        else moveModifier -= moveModifier * (Time.deltaTime * aerialMovementLoss);
+        else
+        {
+            moveModifier -= moveModifier * (Time.deltaTime * aerialMovementLoss);
+        }
+        if (grounded) slamming = false;
+        if (moveModifier < 0.2f) moveModifier = 0.2f;
     }
-
+    void DoDrag()
+    {
+        float timedDrag = 1 - (drag * Time.deltaTime);
+        var velocity = rb.velocity;
+        velocity.x *= timedDrag;;
+        velocity.z *= timedDrag;
+        rb.velocity = velocity;
+    }
     void DoGravity()
     {
         rb.AddForce(-transform.up * gravity * Time.deltaTime);
@@ -76,7 +101,7 @@ public class Movement : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpStrength, ForceMode.Impulse);
         }
-        else if (localJumps > 0 && Input.GetKeyDown(KeyCode.Space))
+        else if (moreJumps && localJumps > 0 && Input.GetKeyDown(KeyCode.Space))
         {
             localJumps--;
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 0.5f, rb.velocity.z);
@@ -85,19 +110,22 @@ public class Movement : MonoBehaviour
         }
 
         //Slamming
-        if (!grounded && Input.GetKeyDown(KeyCode.LeftControl))
+        if (slam && !grounded && Input.GetKeyDown(KeyCode.LeftControl))
         {
+            if (!slamming) rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            slamming = true;
+
             StartCoroutine(nameof(Slamming));
         }
-        else if (!grounded && Input.GetKey(KeyCode.Space))
+        else if (slowFall && !grounded && Input.GetKey(KeyCode.Space))
         {
             gravity = floatGravity;
-            aerialMovementLoss = 0.5f;
+            aerialMovementLoss = 0.2f;
         }
         else
         {
             gravity = fallGravity;
-            aerialMovementLoss = 1;
+            aerialMovementLoss = 0.5f;
         }
     }
 
