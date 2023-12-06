@@ -5,6 +5,9 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     Rigidbody rb;
+    [SerializeField] float explosionRadius;
+    [SerializeField] float explosionStrength;
+    [SerializeField] LayerMask objects;
 
     [Header("Speeds")]
     [SerializeField] float moveSpeed;
@@ -57,12 +60,12 @@ public class Movement : MonoBehaviour
         HandleInputs();
 
         if (grounded) localJumps = jumps;
+        if (grounded) rb.mass = 1;
         if (grounded) moveModifier = groundedModifier;
         else
         {
             moveModifier -= moveModifier * (Time.smoothDeltaTime * aerialMovementLoss);
         }
-        if (grounded) slamming = false;
         if (moveModifier < 0.2f) moveModifier = 0.2f;
     }
     void DoDrag()
@@ -134,6 +137,20 @@ public class Movement : MonoBehaviour
         gravity = slamGravity;
         yield return null;
         if (!grounded) StartCoroutine(nameof(Slamming));
+        else
+        {
+            slamming = false;
+            Vector3 offsetPos = new(transform.position.x, transform.position.y - 1, transform.position.z);
+            Collider[] exploded = Physics.OverlapSphere(transform.position, explosionRadius, objects);
+            foreach (var go in exploded)
+            {
+                Rigidbody goRb = go.GetComponent<Rigidbody>();
+                if (goRb)
+                {
+                    goRb.AddExplosionForce(explosionStrength, transform.position, explosionRadius);
+                }
+            }
+        }
     }
 
     void CheckIfGrounded()

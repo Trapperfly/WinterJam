@@ -18116,7 +18116,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1652400331}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -18186,6 +18186,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de7bfc3818332ff4bbff7d9ef58fc409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionRadius: 5
+  explosionStrength: 500
+  objects:
+    serializedVersion: 2
+    m_Bits: 8192
   moveSpeed: 5000
   runSpeed: 0
   drag: 10
@@ -18199,7 +18204,7 @@ MonoBehaviour:
   gravity: 981
   ground:
     serializedVersion: 2
-    m_Bits: 12288
+    m_Bits: 28672
   playerHeight: 2
   grounded: 0
   moveModifier: 0
@@ -18221,7 +18226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 6916146557993181253, guid: 2cf71b025edc42546bea6b326d8e01b4, type: 3}
-  force: 40
+  force: 4
   shootPoint: {fileID: 89358986}
 --- !u!114 &1652400339
 MonoBehaviour:
