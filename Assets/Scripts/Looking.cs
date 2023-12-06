@@ -19,8 +19,8 @@ public class Looking : MonoBehaviour
     }
     void Update()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensitivityX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensitivityY;
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.smoothDeltaTime * sensitivityX;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.smoothDeltaTime * sensitivityY;
 
         yRot += mouseX;
         xRot -= mouseY;

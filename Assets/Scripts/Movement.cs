@@ -60,14 +60,14 @@ public class Movement : MonoBehaviour
         if (grounded) moveModifier = groundedModifier;
         else
         {
-            moveModifier -= moveModifier * (Time.deltaTime * aerialMovementLoss);
+            moveModifier -= moveModifier * (Time.smoothDeltaTime * aerialMovementLoss);
         }
         if (grounded) slamming = false;
         if (moveModifier < 0.2f) moveModifier = 0.2f;
     }
     void DoDrag()
     {
-        float timedDrag = 1 - (drag * Time.deltaTime);
+        float timedDrag = 1 - (drag * Time.smoothDeltaTime);
         var velocity = rb.velocity;
         velocity.x *= timedDrag;;
         velocity.z *= timedDrag;
@@ -75,26 +75,26 @@ public class Movement : MonoBehaviour
     }
     void DoGravity()
     {
-        rb.AddForce(-transform.up * gravity * Time.deltaTime);
+        rb.AddForce(-transform.up * gravity * Time.smoothDeltaTime);
     }
 
     void HandleInputs()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            rb.AddForce(transform.forward * moveSpeed * moveModifier * Time.deltaTime);
+            rb.AddForce(transform.forward * moveSpeed * moveModifier * Time.smoothDeltaTime);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            rb.AddForce(-transform.right * moveSpeed * moveModifier * Time.deltaTime);
+            rb.AddForce(-transform.right * moveSpeed * moveModifier * Time.smoothDeltaTime);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            rb.AddForce(-transform.forward * moveSpeed * moveModifier * Time.deltaTime);
+            rb.AddForce(-transform.forward * moveSpeed * moveModifier * Time.smoothDeltaTime);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            rb.AddForce(transform.right * moveSpeed * moveModifier * Time.deltaTime);
+            rb.AddForce(transform.right * moveSpeed * moveModifier * Time.smoothDeltaTime);
         }
         //Jumping
         if (grounded && Input.GetKeyDown(KeyCode.Space))
@@ -104,7 +104,7 @@ public class Movement : MonoBehaviour
         else if (moreJumps && localJumps > 0 && Input.GetKeyDown(KeyCode.Space))
         {
             localJumps--;
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 0.5f, rb.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 0.1f, rb.velocity.z);
             rb.AddForce(transform.up * doubleJumpStrength, ForceMode.Impulse);
             moveModifier = groundedModifier;
         }
