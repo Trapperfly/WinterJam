@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 35690397}
   - component: {fileID: 35690396}
   - component: {fileID: 35690395}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cube (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 579634410}
 --- !u!33 &35690396
@@ -194,7 +194,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e9e5f1c9e7ffd974fa9ea23aef46ecfc, type: 2}
+  - {fileID: 2100000, guid: 706c06a5181ee9d43a4594b9e26d62f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -514,7 +514,7 @@ GameObject:
   - component: {fileID: 71922543}
   - component: {fileID: 71922542}
   - component: {fileID: 71922541}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Stairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -540,7 +540,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 626274417}
 --- !u!33 &71922542
@@ -2660,7 +2660,7 @@ GameObject:
   - component: {fileID: 124641667}
   - component: {fileID: 124641666}
   - component: {fileID: 124641665}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2686,7 +2686,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1582901450}
 --- !u!33 &124641666
@@ -3017,7 +3017,7 @@ Transform:
   m_GameObject: {fileID: 124641664}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.19947, y: -0, z: -19.626732}
+  m_LocalPosition: {x: 0.04, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3367,7 +3367,7 @@ GameObject:
   - component: {fileID: 193355237}
   - component: {fileID: 193355236}
   - component: {fileID: 193355235}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3393,7 +3393,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 906461546}
 --- !u!33 &193355236
@@ -3744,7 +3744,7 @@ GameObject:
   - component: {fileID: 205826254}
   - component: {fileID: 205826253}
   - component: {fileID: 205826252}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3770,7 +3770,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 843194186}
 --- !u!33 &205826253
@@ -4121,7 +4121,7 @@ GameObject:
   - component: {fileID: 323014044}
   - component: {fileID: 323014043}
   - component: {fileID: 323014042}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4147,7 +4147,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1164803590}
 --- !u!33 &323014043
@@ -6854,7 +6854,7 @@ GameObject:
   - component: {fileID: 605636575}
   - component: {fileID: 605636574}
   - component: {fileID: 605636573}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6880,7 +6880,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 346076075}
 --- !u!33 &605636574
@@ -8633,7 +8633,7 @@ GameObject:
   - component: {fileID: 825386387}
   - component: {fileID: 825386386}
   - component: {fileID: 825386385}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8659,7 +8659,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1421980382}
 --- !u!33 &825386386
@@ -10834,7 +10834,7 @@ GameObject:
   - component: {fileID: 887105808}
   - component: {fileID: 887105807}
   - component: {fileID: 887105806}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10860,7 +10860,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 952423913}
 --- !u!33 &887105807
@@ -11588,6 +11588,7 @@ GameObject:
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
+  - component: {fileID: 963194231}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -11719,6 +11720,29 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &963194231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b5197ff51638a4084f5ce4e099952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupRange: 6
+  placementRange: 12
+  valid: {fileID: 2100000, guid: ea749fae27379ea48ab9328f374db880, type: 2}
+  invalid: {fileID: 2100000, guid: 706c06a5181ee9d43a4594b9e26d62f1, type: 2}
+  mask:
+    serializedVersion: 2
+    m_Bits: 24576
+  placePoint: {fileID: 1243396299}
+  holding: 0
+  scrollSpeedNormal: 20
+  scrollSpeedSlow: 1
 --- !u!1 &1106354045
 GameObject:
   m_ObjectHideFlags: 0
@@ -11778,7 +11802,7 @@ GameObject:
   - component: {fileID: 1114599885}
   - component: {fileID: 1114599884}
   - component: {fileID: 1114599883}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11804,7 +11828,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 131546540}
 --- !u!33 &1114599884
@@ -12306,6 +12330,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1243396298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1243396299}
+  m_Layer: 0
+  m_Name: placePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1243396299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243396298}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1347007468
 GameObject:
   m_ObjectHideFlags: 0
@@ -12320,7 +12375,7 @@ GameObject:
   - component: {fileID: 1347007471}
   - component: {fileID: 1347007470}
   - component: {fileID: 1347007469}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Stairs (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12346,7 +12401,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2120320576}
 --- !u!33 &1347007470
@@ -16393,7 +16448,7 @@ GameObject:
   - component: {fileID: 1351179632}
   - component: {fileID: 1351179631}
   - component: {fileID: 1351179630}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16419,7 +16474,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 529241849}
 --- !u!33 &1351179631
@@ -17453,7 +17508,7 @@ GameObject:
   - component: {fileID: 1536380100}
   - component: {fileID: 1536380099}
   - component: {fileID: 1536380098}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17479,7 +17534,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1894441033}
 --- !u!33 &1536380099
@@ -18144,7 +18199,7 @@ MonoBehaviour:
   gravity: 981
   ground:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 12288
   playerHeight: 2
   grounded: 0
   moveModifier: 0
@@ -18360,7 +18415,7 @@ GameObject:
   - component: {fileID: 1767119059}
   - component: {fileID: 1767119058}
   - component: {fileID: 1767119057}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Pipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18386,7 +18441,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1499978805}
 --- !u!33 &1767119058
@@ -19516,7 +19571,7 @@ GameObject:
   - component: {fileID: 1959017301}
   - component: {fileID: 1959017300}
   - component: {fileID: 1959017299}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19542,7 +19597,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 142864475}
 --- !u!33 &1959017300
@@ -19893,7 +19948,7 @@ GameObject:
   - component: {fileID: 1960937929}
   - component: {fileID: 1960937928}
   - component: {fileID: 1960937927}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Cylinder (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19919,7 +19974,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 643851220}
 --- !u!33 &1960937928
@@ -22090,3 +22145,4 @@ SceneRoots:
   - {fileID: 1106354047}
   - {fileID: 489570880}
   - {fileID: 963194228}
+  - {fileID: 1243396299}
