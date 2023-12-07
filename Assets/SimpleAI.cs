@@ -11,11 +11,13 @@ public class SimpleAI : MonoBehaviour
     public float moveSpeed;
     public Transform target;
     Material mat;
+    [SerializeField] ParticleSystem ps;
     public float spikey;
     public float frequency;
 
     private void Start()
     {
+
         Random.InitState(GetInstanceID());
         mat = GetComponent<MeshRenderer>().material;
     }
@@ -28,7 +30,7 @@ public class SimpleAI : MonoBehaviour
 
         if (!attacking) transform.position += transform.forward * moveSpeed * Time.deltaTime;
 
-        if (Vector3.Distance(transform.position, target.position) < attackRange)
+        if (Vector3.Distance(transform.position, target.position) < attackRange * transform.localScale.x)
         {
             if (!attacking) StartCoroutine(nameof(Attack));
         }
@@ -46,6 +48,7 @@ public class SimpleAI : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(0.2f);
+        ps.Play();
         spikey = 5f;
         mat.SetFloat("_SpikeLength", spikey);
         yield return new WaitForSeconds(0.5f);
@@ -58,6 +61,7 @@ public class SimpleAI : MonoBehaviour
         spikey = 0;
         mat.SetFloat("_SpikeLength", spikey);
         attacking = false;
+        ps.Stop();
         yield return null;
     }
 }
