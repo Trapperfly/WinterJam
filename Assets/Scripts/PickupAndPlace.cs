@@ -8,6 +8,9 @@ public class PickupAndPlace : MonoBehaviour
     [SerializeField] float pickupRange;
     [SerializeField] float placementRange;
 
+    [SerializeField] float heldObjectRange;
+    [SerializeField] float heldObjectSpeed;
+
     GameObject heldObject;
     GameObject heldObjectClone;
 
@@ -20,13 +23,15 @@ public class PickupAndPlace : MonoBehaviour
     [SerializeField] Transform placePoint;
     Vector3 savedSpace;
 
-
     public bool holding;
+    public bool holdingStruct;
+    public bool holdingObj;
 
     float scrollDelta = 0;
     [SerializeField] float scrollSpeedNormal;
     [SerializeField] float scrollSpeedSlow;
     float scrollSpeed;
+    bool caps;
 
     Vector3 center;
     Vector3 worldCenter;
@@ -49,70 +54,168 @@ public class PickupAndPlace : MonoBehaviour
             {
                 heldObject = hitInfo.transform.gameObject;
                 Vector3 savedRot = hitInfo.transform.eulerAngles;
-
-                heldObjectClone = Instantiate(heldObject, placePoint);
-                Rigidbody heldRb = heldObjectClone.GetComponent<Rigidbody>();
-                if (heldRb)
+                //hit structure
+                if (hitInfo.transform.gameObject.layer == 14)
                 {
-                    heldRb.isKinematic = true;
-                    heldRb.useGravity = false;
-                    heldRb.drag = 0;
+                    heldObjectClone = Instantiate(heldObject, placePoint);
+                    Rigidbody heldRb = heldObjectClone.GetComponent<Rigidbody>();
+                    if (heldRb)
+                    {
+                        heldRb.isKinematic = true;
+                        heldRb.useGravity = false;
+                        heldRb.drag = 0;
+                    }
+                    heldObjectClone.GetComponent<Collider>().isTrigger = true;
+                    heldObjectClone.GetComponent<MeshRenderer>().material = valid;
+                    foreach (Transform t in heldObjectClone.transform)
+                    {
+                        t.GetComponent<MeshRenderer>().material = valid;
+                    }
+                    holding = true;
+                    holdingStruct = true;
+                    rayLength = placementRange;
+                    heldObjectClone.layer = 0;
+                    mask |= 1 << LayerMask.NameToLayer("Ground");
+
+                    heldObjectClone.transform.localRotation = new Quaternion(0, 0, 0, 0);
+
+                    center = heldObjectClone.GetComponent<Renderer>().localBounds.center;
+                    worldCenter = heldObjectClone.GetComponent<Renderer>().bounds.center;
+                    heldObjectClone.transform.localPosition = new Vector3(-center.x, -center.y, -center.z);
+
+                    placePoint.eulerAngles = savedRot;
+
+                    scrollDelta = savedRot.y;
                 }
-                heldObjectClone.GetComponent<Collider>().isTrigger = true;
-                heldObjectClone.GetComponent<MeshRenderer>().material = valid;
-                holding = true;
-                rayLength = placementRange;
-                heldObjectClone.layer = 0;
-                mask |= 1 << LayerMask.NameToLayer("Ground");
+                //hit object or block
+                else
+                {
+                    heldObject.transform.parent = placePoint;
+                    Rigidbody heldRb = heldObject.GetComponent<Rigidbody>();
+                    if (heldRb)
+                    {
+                        heldRb.useGravity = false;
+                        heldRb.drag = 0;
+                        heldRb.angularDrag = 20;
+                    }
+                    //heldObject.GetComponent<Collider>().isTrigger = true;
+                    holding = true;
+                    holdingObj = true;
+                    rayLength = placementRange;
+                    mask |= 1 << LayerMask.NameToLayer("Ground");
 
-                heldObjectClone.transform.localRotation = new Quaternion(0, 0, 0, 0);
+                    heldObject.transform.localRotation = new Quaternion(0, 0, 0, 0);
 
-                center = heldObjectClone.GetComponent<Renderer>().localBounds.center;
-                worldCenter = heldObjectClone.GetComponent<Renderer>().bounds.center;
-                heldObjectClone.transform.localPosition = new Vector3(-center.x, -center.y, -center.z);
+                    center = heldObject.GetComponent<Renderer>().localBounds.center;
+                    worldCenter = heldObject.GetComponent<Renderer>().bounds.center;
+                    heldObject.transform.localPosition = new Vector3(0,0,0);
 
-                placePoint.eulerAngles = savedRot;
+                    placePoint.eulerAngles = savedRot;
 
-                scrollDelta = savedRot.y;
+                    scrollDelta = savedRot.y;
+                }
+                
             }
             //Placing down
             else if (Input.GetKeyDown(KeyCode.F))
             {
-                heldObjectClone.transform.parent = null;
+                if (holdingStruct)
+                {
+                    heldObjectClone.transform.parent = null;
 
-                heldObject.transform.position = heldObjectClone.transform.position;
+                    heldObject.transform.position = heldObjectClone.transform.position;
 
-                heldObject.transform.rotation = heldObjectClone.transform.rotation;
+                    heldObject.transform.rotation = heldObjectClone.transform.rotation;
 
-                heldObject = null;
-                Destroy(heldObjectClone);
-                holding = false;
-                rayLength = pickupRange;
-                mask &= ~1 << LayerMask.NameToLayer("Ground");
+                    heldObject = null;
+                    Destroy(heldObjectClone);
+                    holding = false;
+                    holdingObj = false;
+                    holdingStruct = false;
+                    rayLength = pickupRange;
+                    mask &= ~1 << LayerMask.NameToLayer("Ground");
+                }
+                if (holdingObj)
+                {
+                    Rigidbody heldRb = heldObject.GetComponent<Rigidbody>();
+                    if (heldRb)
+                    {
+                        heldRb.useGravity = true;
+                        heldRb.drag = 0;
+                        heldRb.angularDrag = 0;
+                        heldRb.velocity = Vector3.zero;
+                    }
+                    heldObject.transform.parent = null;
+
+                    heldObject = null;
+                    Destroy(heldObjectClone);
+                    holding = false;
+                    holdingObj = false;
+                    holdingStruct = false;
+                    rayLength = pickupRange;
+                    mask &= ~1 << LayerMask.NameToLayer("Ground");
+                }
             }
         }
 
         if (!heldObject) { }
         else
         {
-            scrollDelta += Input.mouseScrollDelta.y * scrollSpeed;
-            placePoint.rotation = Quaternion.Euler(0, scrollDelta, 0);
             if (heldObject.layer == 14) 
                 heldObjectClone.transform.localPosition = new Vector3(-center.x, 0, -center.z);
             else 
-                heldObjectClone.transform.localPosition = new Vector3(-center.x, -center.y, -center.z);
+                heldObject.transform.localPosition = new Vector3(-center.x, -center.y, -center.z);
 
-            if (hit) savedSpace = hitInfo.point;
-            if (!Input.GetMouseButton(1)) placePoint.position = savedSpace;
+            if (holdingObj) savedSpace = transform.position + (transform.forward * heldObjectRange);
+            else if (hit && holdingStruct) savedSpace = hitInfo.point;
 
-            if (Input.GetKey(KeyCode.LeftShift)) scrollSpeed = scrollSpeedSlow;
+            if (holdingObj)
+            {
+                if (!Input.GetMouseButton(1)) placePoint.position = Vector3.Lerp(placePoint.position, savedSpace, heldObjectSpeed);
+            }
+            else if (holdingStruct)
+            {
+                if (!Input.GetMouseButton(1)) placePoint.position = savedSpace;
+            }
+
+            if (caps) scrollSpeed = scrollSpeedSlow;
             else scrollSpeed = scrollSpeedNormal;
 
+            scrollDelta += Input.mouseScrollDelta.y * scrollSpeed;
+            //Quaternion rot = placePoint.rotation;
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                placePoint.transform.RotateAround(placePoint.position, placePoint.right, scrollDelta);
+            }
+            else if (Input.GetKey(KeyCode.LeftShift))
+            {
+                placePoint.transform.RotateAround(placePoint.position, placePoint.forward, scrollDelta);
+            }
+            else placePoint.transform.RotateAround(placePoint.position, placePoint.up, scrollDelta);
+
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                Quaternion nullRot = new Quaternion(0, 0, 0, 0);
+                placePoint.rotation = nullRot;
+                foreach (Transform t in placePoint.transform) { t.rotation = nullRot; }
+            }
+
+
+            //placePoint.rotation = rot;
+
+            //rot = Quaternion.Euler(rot.eulerAngles.x, rot.eulerAngles.y, rot.eulerAngles.z + scrollDelta);
+
             Debug.Log(scrollDelta);
+            scrollDelta = 0;
         }
     }
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(placePoint.position, 1);
+    }
+
+    private void OnGUI()
+    {
+        if (Event.current.capsLock) caps = true; else caps = false;
     }
 }
