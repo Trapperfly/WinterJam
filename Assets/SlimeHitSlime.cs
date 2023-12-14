@@ -13,7 +13,7 @@ public class SlimeHitSlime : MonoBehaviour
     private void OnCollisionStay(Collision collision)
     {
         Debug.Log("Slime collided with slime");
-        if (collision.collider.CompareTag("CanCombine"))
+        if (collision.collider.CompareTag("CanCombine") && transform.CompareTag("CanCombine"))
         {
             if (!combine.combinedThisFrame) combine.CombineSlimes(gameObject, collision.collider.gameObject);
         }

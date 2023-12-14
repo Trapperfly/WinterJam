@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class Combining : MonoBehaviour
@@ -22,9 +21,11 @@ public class Combining : MonoBehaviour
         Destroy(slime1);
         Destroy(slime0);
 
-        GameObject newSlime = Instantiate(tempSlime, math.lerp(slimePos0, slimePos1, 0.5f), new Quaternion(), null);
+        GameObject newSlime = Instantiate(tempSlime, Vector3.Lerp(slimePos0, slimePos1, 0.5f), new Quaternion(), null);
 
         newSlime.transform.localScale = ((slimeSize0 + slimeSize1) / 2) + ((slimeSize0 + slimeSize1) / 3);
+
+        if (newSlime.transform.localScale.x > 4 || Random.Range(0, 2) < 1) newSlime.tag = "Untagged";
 
         newSlime.GetComponent<SimpleAI>().enabled = true;
         newSlime.GetComponentInChildren<AdjustToSize>().enabled = true;
@@ -32,7 +33,7 @@ public class Combining : MonoBehaviour
     IEnumerator CombineCooldown()
     {
         combinedThisFrame = true;
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(1f);
         combinedThisFrame = false;
         yield return null;  
     }

@@ -5,27 +5,28 @@ using UnityEngine.UIElements;
 
 public class SimpleAI : MonoBehaviour
 {
-    public float startHealth;
-    public float currentHealth;
+    [SerializeField] float startHealth;
+    [SerializeField] float currentHealth;
     float healthPercent;
-    public float detractSpeed;
-    public float retractSpeed;
+    [SerializeField] float detractSpeed;
+    [SerializeField] float retractSpeed;
     bool attacking;
     bool isDead;
     float deadMove;
-    public float attackRange;
-    public float moveSpeed;
-    public Transform target;
+    [SerializeField] float attackRange;
+    [SerializeField] float moveSpeed;
+    [SerializeField] Transform target;
     Material mat;
     [SerializeField] ParticleSystem ps;
-    public float spikey;
-    public float frequency;
+    [SerializeField] float spikey;
+    [SerializeField] float frequency;
 
     [SerializeField] Transform tramplePs;
 
     private void Start()
     {
         mat = GetComponent<MeshRenderer>().material;
+        GetComponent<Rigidbody>().mass = 10 + Mathf.Pow(transform.localScale.x, 5);
         startHealth *= Mathf.Pow(transform.localScale.x, 2);
         currentHealth = startHealth;
         healthPercent = currentHealth / startHealth;
