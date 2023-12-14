@@ -24,7 +24,7 @@ public class Combining : MonoBehaviour
 
         GameObject newSlime = Instantiate(tempSlime, math.lerp(slimePos0, slimePos1, 0.5f), new Quaternion(), null);
 
-        newSlime.transform.localScale = ((slimeSize0 + slimeSize1) / 2) + ((slimeSize0 + slimeSize1) / 4);
+        newSlime.transform.localScale = ((slimeSize0 + slimeSize1) / 2) + ((slimeSize0 + slimeSize1) / 3);
 
         newSlime.GetComponent<SimpleAI>().enabled = true;
         newSlime.GetComponentInChildren<AdjustToSize>().enabled = true;

@@ -12,6 +12,7 @@ public class SimpleAI : MonoBehaviour
     public float retractSpeed;
     bool attacking;
     bool isDead;
+    float deadMove;
     public float attackRange;
     public float moveSpeed;
     public Transform target;
@@ -39,8 +40,8 @@ public class SimpleAI : MonoBehaviour
         transform.LookAt(target);
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
-        if (isDead) { transform.position += -transform.up * moveSpeed * Time.deltaTime; }
-        else if (attacking) { }
+        if (isDead) { transform.position += -transform.up * deadMove * Time.deltaTime; deadMove += 1 * Time.deltaTime; }
+        if (attacking) { }
         else transform.position += transform.forward * moveSpeed * Time.deltaTime;
 
         if (!isDead && Vector3.Distance(transform.position, target.position) < attackRange * transform.localScale.x)
@@ -94,6 +95,7 @@ public class SimpleAI : MonoBehaviour
     void SimpleDie()
     {
         gameObject.GetComponent<Collider>().enabled = false;
+        gameObject.GetComponent<Rigidbody>().isKinematic = true;
         tramplePs.parent = null;
         tramplePs.transform.position += new Vector3(0, -3,0);
         Destroy(tramplePs.gameObject, 10);
