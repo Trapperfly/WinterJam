@@ -27,6 +27,7 @@ public class Combining : MonoBehaviour
         newSlime.transform.localScale = ((slimeSize0 + slimeSize1) / 2) + ((slimeSize0 + slimeSize1) / 4);
 
         newSlime.GetComponent<SimpleAI>().enabled = true;
+        newSlime.GetComponentInChildren<AdjustToSize>().enabled = true;
     }
     IEnumerator CombineCooldown()
     {

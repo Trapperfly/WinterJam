@@ -52,6 +52,7 @@ Material:
     m_Floats:
     - _Attacking: 1
     - _EffectSmoothness: 5.56
+    - _Health: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Speed: 2.8

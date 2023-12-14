@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7023650982355006315}
   m_Layer: 16
   m_Name: SnowBall
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

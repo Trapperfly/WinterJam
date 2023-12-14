@@ -5,6 +5,11 @@ using UnityEngine;
 public class SlimeHitSlime : MonoBehaviour
 {
     [SerializeField] Combining combine;
+
+    private void Awake()
+    {
+        combine = GameObject.FindGameObjectWithTag("Global").GetComponent<Global>().combine;
+    }
     private void OnCollisionStay(Collision collision)
     {
         Debug.Log("Slime collided with slime");

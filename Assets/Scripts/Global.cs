@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Global : MonoBehaviour
 {
+	public Transform player;
+	public Combining combine;
 	public int targetFrameRate = 60;
 
 	private void Start()
